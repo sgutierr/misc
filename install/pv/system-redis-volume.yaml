@@ -8,6 +8,6 @@ spec:
   capacity:
     storage: 1Gi
   hostPath:
-    path: /exports/pvs/system-storage
+    path: /exports/pvs/system-storage/system-redis
   persistentVolumeReclaimPolicy: Recycle
 
