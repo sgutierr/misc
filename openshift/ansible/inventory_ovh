@@ -1,0 +1,58 @@
+[OSEv3:children]
+nodes
+masters
+etcd
+nfs
+
+[OSEv3:vars]
+ansible_ssh_user=root
+
+containerized=true
+openshift_image_tag=v1.5.0
+openshift_release=v1.5
+osm_cluster_network_cidr=172.16.0.0/16
+openshift_public_hostname=ocmaster.openshift.it
+
+deployment_type=origin
+
+# htpasswd auth
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+
+openshift_master_default_subdomain=openshift.it
+
+######## NFS storage for METRICS  #####################
+#openshift_hosted_metrics_storage_kind=nfs
+#openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']
+#openshift_hosted_metrics_storage_nfs_directory=/exports
+#openshift_hosted_metrics_storage_nfs_options='*(rw,root_squash)'
+#openshift_hosted_metrics_storage_volume_name=metrics
+#openshift_hosted_metrics_storage_volume_size=10Gi
+
+
+#openshift_hosted_logging_deploy=true
+#openshift_logging_install_logging=true
+#openshift_logging_image_version=v1.5.0
+#openshift_logging_public_master_url=logging.app.test.openshift.it
+#openshift_logging_kibana_hostname=kibana.app.test.openshift.it
+#openshift_logging_kibana_edge_term_policy=None
+
+
+#openshift_hosted_logging_storage_kind=nfs
+#openshift_hosted_logging_storage_access_modes=['ReadWriteOnce']
+#openshift_hosted_logging_storage_nfs_directory=/exports
+#openshift_hosted_logging_storage_nfs_options='*(rw,root_squash)'
+#openshift_hosted_logging_storage_volume_name=logging
+#openshift_hosted_logging_storage_volume_size=10Gi
+
+[masters]
+vps407178.ovh.net 
+
+[nodes]
+vps407178.ovh.net openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+vps407178.ovh.net openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=True
+
+[nfs]
+vps407178.ovh.net 
+
+[etcd]
+vps407178.ovh.net
